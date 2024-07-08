@@ -1,7 +1,7 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "../inc/Node.h"
+#include "..\inc\Node.h"
 
 struct node *createNode(char *title, size_t sizeChar)
 {
@@ -31,27 +31,27 @@ int cmpChar(char a, char b)
     return ((int)a < (int)b) ? LEFT : RIGHT;
 }
 
-int includeNode(struct node *root, struct node **node_include)
+struct node *includeNode(struct node *root, struct node *node_include)
 {
-    if (*node_include == NULL)
-        return 0;
+    if (node_include == NULL)
+        return NULL;
 
     if (root == NULL)
     {
-        root = *node_include;
-        return 1;
+        root = node_include;
+        return root;
     }
 
-    if (cmpChar((*node_include)->title[0], root->title[0]) == LEFT)
+    if (cmpChar(node_include->title[0], root->title[0]) == LEFT)
     {
-        includeNode(root->left, node_include);
+        root->left = includeNode(root->left, node_include);
     }
     else
     {
-        includeNode(root->right, node_include);
+        root->right = includeNode(root->right, node_include);
     }
 
-    return 1;
+    return root;
 }
 
 void showTree(struct node *root)

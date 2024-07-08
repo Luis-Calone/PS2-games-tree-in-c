@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+// setting the values for cmpChar() //
 #define LEFT 0
 #define RIGHT 1
 
+// the base node struct //
 struct node
 {
     struct node *left;
@@ -13,8 +15,20 @@ struct node
     char *imgPath;
 };
 
-void showTree(struct node *root);
+/* createNode() is the method that create each node */
 struct node *createNode(char *title, size_t sizeChar);
+
+/* setImgPath() gets the created node and set the image path in the
+project files */
 int setImgPath(struct node *node, char *imgPath);
+
+/* cmpChar() is just an auxiliar method to compare the titles in nodes */
 int cmpChar(char a, char b);
-int includeNode(struct node *root, struct node **node_include);
+
+/* includeNode() gets the root node of the tree and the node to be added
+and returns the root with the new node included */
+struct node *includeNode(struct node *root, struct node *node_include);
+
+/* showTree() is a function that runs all the tree and
+print itself in order */
+void showTree(struct node *root);
