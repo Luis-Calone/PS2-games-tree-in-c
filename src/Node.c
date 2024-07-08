@@ -1,7 +1,11 @@
 #ifndef NODE_H
 #define NODE_H
 
+#ifdef _WIN32
 #include "..\inc\Node.h"
+#else
+#include "../inc/Node.h"
+#endif
 
 struct node *createNode(char *title, size_t sizeChar)
 {
@@ -59,9 +63,9 @@ void showTree(struct node *root)
     if (root == NULL)
         return;
 
-    showTree(root->right);
-    printf("%s\n", root->title);
     showTree(root->left);
+    printf("%s\n", root->title);
+    showTree(root->right);
 }
 
 #endif
