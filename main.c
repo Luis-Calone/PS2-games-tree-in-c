@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     struct node *root = createNode(name, 10);
     struct node *leaf = createNode(name2, 10);
 
-    includeNode(&root, leaf);
+    includeNode(root, &leaf);
 
     printf("%s\n", root->right->title);
 

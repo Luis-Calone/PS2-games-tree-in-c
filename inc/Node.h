@@ -17,4 +17,4 @@ void showTree(struct node *root);
 struct node *createNode(char *title, size_t sizeChar);
 int setImgPath(struct node *node, char *imgPath);
 int cmpChar(char a, char b);
-int includeNode(struct node *root, struct node *node_include);
+int includeNode(struct node *root, struct node **node_include);

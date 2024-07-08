@@ -38,14 +38,11 @@ int includeNode(struct node *root, struct node **node_include)
 
     if (root == NULL)
     {
-        root = node_include;
+        root = *node_include;
         return 1;
     }
 
-    // AJEITAR!!!!!!!!!!!!!!!!!!!!!!//
-    char temp = node_include;
-
-    if (cmpChar(*(node_include)->title[0], root->title[0]) == LEFT)
+    if (cmpChar((*node_include)->title[0], root->title[0]) == LEFT)
     {
         includeNode(root->left, node_include);
     }
