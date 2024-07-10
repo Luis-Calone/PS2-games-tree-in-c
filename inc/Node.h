@@ -15,6 +15,13 @@ struct node
     char *imgPath;
 };
 
+typedef struct tree
+{
+    struct node *root;
+    size_t hight;
+    int FB;
+} Tree;
+
 /* createNode() is the method that create each node */
 struct node *createNode(char *title, size_t sizeChar);
 
@@ -32,3 +39,8 @@ struct node *includeNode(struct node *root, struct node *node_include);
 /* showTree() is a function that runs all the tree and
 print itself in order */
 void showTree(struct node *root);
+
+/* rollRight() rolls the tree to the right side for balancing */
+struct node *rollRIght(struct node *root);
+
+struct node *rollLeft(struct node *root);

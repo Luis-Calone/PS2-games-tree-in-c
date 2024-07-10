@@ -68,4 +68,12 @@ void showTree(struct node *root)
     showTree(root->right);
 }
 
+struct node *rollRIght(struct node *root)
+{
+    struct node *temp = root->right;
+    root->right = temp->left;
+    temp->left = root;
+    return temp;
+}
+
 #endif
