@@ -68,6 +68,32 @@ void showElements(struct node *root)
     showElements(root->right);
 }
 
+// A função showTree faz um desenho esquerda-direita-raiz
+// da árvore x. O desenho terá uma margem esquerda de
+// 2b espaços.
+void showTree(struct node *a, int b)
+{
+    if (a == NULL)
+    {
+        printNum('*', b);
+        return;
+    }
+    showTree(a->right, b + 1);
+    printNum(a->title[0], b);
+    showTree(a->left, b + 1);
+}
+
+// A função auxiliar printNum imprime o caracter
+// c precedido de 3b espaços e seguido de uma mudança
+// de linha.
+void printNum(char c, int b)
+{
+    int i;
+    for (i = 0; i < b; i++)
+        printf("  ");
+    printf("%c\n", c);
+}
+
 struct node *rollRight(struct node *root)
 {
     struct node *temp = root->right;

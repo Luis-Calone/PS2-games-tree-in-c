@@ -40,7 +40,15 @@ struct node *includeNode(struct node *root, struct node *node_include);
 print itself in order */
 void showElements(struct node *root);
 
+/* showTree() its a method tha shows the tree horizontally 
+in the terminal */
+void showTree(struct node *a, int b);
+
+/* printNum() is an auxiliar method*/
+void printNum(char c, int b);
+
 /* rollRight() rolls the tree to the right side for balancing */
 struct node *rollRight(struct node *root);
 
+/* rollLeft() rolls the tree to the left side for balancing */
 struct node *rollLeft(struct node *root);
