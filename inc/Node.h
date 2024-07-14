@@ -36,11 +36,11 @@ int cmpChar(char a, char b);
 and returns the root with the new node included */
 struct node *includeNode(struct node *root, struct node *node_include);
 
-/* showTree() is a function that runs all the tree and
+/* showElements() is a function that runs all the tree and
 print itself in order */
-void showTree(struct node *root);
+void showElements(struct node *root);
 
 /* rollRight() rolls the tree to the right side for balancing */
-struct node *rollRIght(struct node *root);
+struct node *rollRight(struct node *root);
 
 struct node *rollLeft(struct node *root);

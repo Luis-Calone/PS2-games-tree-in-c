@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     root = includeNode(root, NODE3);
     root = includeNode(root, NODE4);
 
-    // showTree(root);
+    // showElements(root);
 
     mostraArvore(root, 0);
 
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     printf("\n");
     printf("\n");
     mostraArvore(root, 0);
-    // showTree(root);
+    // showElements(root);
 
     return EXIT_SUCCESS;
 }

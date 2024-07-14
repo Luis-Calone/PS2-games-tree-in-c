@@ -58,21 +58,29 @@ struct node *includeNode(struct node *root, struct node *node_include)
     return root;
 }
 
-void showTree(struct node *root)
+void showElements(struct node *root)
 {
     if (root == NULL)
         return;
 
-    showTree(root->left);
+    showElements(root->left);
     printf("%s\n", root->title);
-    showTree(root->right);
+    showElements(root->right);
 }
 
-struct node *rollRIght(struct node *root)
+struct node *rollRight(struct node *root)
 {
     struct node *temp = root->right;
     root->right = temp->left;
     temp->left = root;
+    return temp;
+}
+
+struct node *rollLeft(struct node *root)
+{
+    struct node *temp = root->left;
+    root->left = temp->right;
+    temp->right = root;
     return temp;
 }
 
