@@ -96,7 +96,13 @@ void printNum(char c, int b)
 
 struct node *rollRight(struct node *root)
 {
-    struct node *temp = root->right;
+    if (root == NULL)
+        return root;
+
+    struct node *temp;
+    if ((temp = root->right) == NULL)
+        return root;
+
     root->right = temp->left;
     temp->left = root;
     return temp;
@@ -104,7 +110,13 @@ struct node *rollRight(struct node *root)
 
 struct node *rollLeft(struct node *root)
 {
-    struct node *temp = root->left;
+    if (root == NULL)
+        return root;
+
+    struct node *temp;
+    if ((temp = root->left) == NULL)
+        return root;
+
     root->left = temp->right;
     temp->right = root;
     return temp;
