@@ -28,16 +28,32 @@ int main(int argc, char **argv)
     char line[MAX_LINE_LENGTH];
 
     char title[50];
-    char developer[60];
+    char developer[50];
     char publisher[50];
     char released[25];
-    char JP[2];
-    char EU[2];
-    char NA[2];
+    char JP[5];
+    char EU[5];
+    char NA[5];
 
     // fscanf(tab1, "%[^,]", title);
     // printf("%s\n", title);
 
+    while (fscanf(tab1, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", title, developer,
+                  publisher, released, JP, EU, NA))
+    {
+        printf("%s, %s, %s, %s, %s, %s, %s\n", title, developer, publisher,
+               released, JP, EU, NA);
+
+        memset(title, 0, sizeof(title));
+        memset(developer, 0, sizeof(developer));
+        memset(publisher, 0, sizeof(publisher));
+        memset(released, 0, sizeof(released));
+        memset(JP, 0, sizeof(JP));
+        memset(EU, 0, sizeof(EU));
+        memset(NA, 0, sizeof(NA));
+    }
+
+    /*
     while (fgets(line, sizeof(line), tab1))
     {
         printf("%s\n", line);
@@ -53,16 +69,8 @@ int main(int argc, char **argv)
             return EXIT_FAILURE;
         }
 
-        memset(title, 0, sizeof(title));
-        memset(developer, 0, sizeof(developer));
-        memset(publisher, 0, sizeof(publisher));
-        memset(released, 0, sizeof(released));
-        memset(JP, 0, sizeof(JP));
-        memset(EU, 0, sizeof(EU));
-        memset(NA, 0, sizeof(NA));
     }
 
-    /*
     char *name0 = (char *)malloc(10);
     char *name1 = (char *)malloc(10);
     char *name2 = (char *)malloc(10);
