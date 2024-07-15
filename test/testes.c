@@ -29,7 +29,7 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    char c;
+    char c = '\0';
     char title[100];
     char developer[30];
     char publisher[35];
@@ -41,50 +41,94 @@ int main(int argc, char **argv)
 
     while (var)
     {
-
         i = 0;
-        while ((c = fgetc(tab1)) != ',')
+        if (c == '\"')
         {
-            title[i] = c;
-            i++;
+            while ((c = fgetc(tab1)) != '\"')
+            {
+                title[i] = c;
+                i++;
+            }
+        }
+        else
+        {
+
+            while ((c = fgetc(tab1)) != ',')
+            {
+                title[i] = c;
+                i++;
+            }
         }
         title[i] = '\0';
         printf("%s, ", title);
 
         i = 0;
-        while ((c = fgetc(tab1)) != ',')
+        if (c == '\"')
         {
-            developer[i] = c;
-            i++;
+            while ((c = fgetc(tab1)) != '\"')
+            {
+                developer[i] = c;
+                i++;
+            }
+        }
+        else
+        {
+            while ((c = fgetc(tab1)) != ',')
+            {
+                developer[i] = c;
+                i++;
+            }
         }
         developer[i] = '\0';
         printf("%s, ", developer);
 
         i = 0;
-        while ((c = fgetc(tab1)) != ',')
+        if (c == '\"')
         {
-            publisher[i] = c;
-            i++;
+            while ((c = fgetc(tab1)) != '\"')
+            {
+                publisher[i] = c;
+                i++;
+            }
+        }
+        else
+        {
+            while ((c = fgetc(tab1)) != ',')
+            {
+                publisher[i] = c;
+                i++;
+            }
         }
         publisher[i] = '\0';
         printf("%s, ", publisher);
 
         i = 0;
-        while ((c = fgetc(tab1)) != ',')
+        if (c == '\"')
         {
-            released[i] = c;
-            i++;
+            while ((c = fgetc(tab1)) != '\"')
+            {
+                released[i] = c;
+                i++;
+            }
         }
-        released[i] = '\0';
-        printf("%s", released);
+        else
+        {
+            while ((c = fgetc(tab1)) != ',')
+            {
+                released[i] = c;
+                i++;
+            }
+            released[i] = '\0';
+            printf("%s", released);
+        }
 
         while (c = fgetc(tab1) != '\n')
         {
-            if (c==EOF)
+            if (c == EOF)
                 break;
         }
         printf("\n");
- 
+
         if (c == EOF)
             var = false;
     }
