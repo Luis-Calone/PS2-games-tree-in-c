@@ -31,14 +31,22 @@ int main(int argc, char **argv)
     char developer[60];
     char publisher[50];
     char released[25];
+    char JP[2];
+    char EU[2];
+    char NA[2];
+
+    // fscanf(tab1, "%[^,]", title);
+    // printf("%s\n", title);
 
     while (fgets(line, sizeof(line), tab1))
     {
-        if (sscanf(line, "%[^,],%[^,],%[^,],%[^,]", title, developer,
-                   publisher, released))
+        printf("%s\n", line);
 
-            printf("data: %s, %s, %s, %s\n", title, developer, publisher,
-                   released);
+        if (sscanf(line, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", title, developer,
+                   publisher, released, JP, EU, NA))
+
+            printf("data: %s, %s, %s, %s, %s, %s, %s\n", title, developer, publisher,
+                   released, JP, EU, NA);
         else
         {
             perror("ERRO AO LER OS DADOS");
@@ -49,6 +57,9 @@ int main(int argc, char **argv)
         memset(developer, 0, sizeof(developer));
         memset(publisher, 0, sizeof(publisher));
         memset(released, 0, sizeof(released));
+        memset(JP, 0, sizeof(JP));
+        memset(EU, 0, sizeof(EU));
+        memset(NA, 0, sizeof(NA));
     }
 
     /*
