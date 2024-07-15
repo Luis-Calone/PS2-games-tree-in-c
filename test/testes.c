@@ -1,130 +1,94 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
+#include <stdbool.h>
 
 #ifdef _WIN32
 #include "..\inc\Node.h"
-#define CSVPATH_A "..\\csv\\List_of_PlayStation(A-K).csv"
-#define CSVPATH_B "..\\csv\\List_of_PlayStation(L-Z).csv"
+#define CSVPATH_A "..\\csv\\ListOfPs2GamesAK.csv"
+#define CSVPATH_B "..\\csv\\ListOfPs2GamesLZ.csv"
 #else
 #include "../inc/Node.h"
-#define CSVPATH_A "../csv/List_of_PlayStation_2_games(A-K).csv"
-#define CSVPATH_B "../csv/List_of_PlayStation_2_games(L-Z).csv"
+#define CSVPATH_A "../csv/ListOfPs2GamesAK.csv"
+#define CSVPATH_B "../csv/ListOfPs2GamesLZ.csv"
 #endif
 
 #define MAX_LINE_LENGTH 255
 
 int main(int argc, char **argv)
 {
+    setlocale(LC_ALL, "");
+
     FILE *tab1 = fopen(CSVPATH_A, "r");
     FILE *tab2 = fopen(CSVPATH_B, "r");
 
     if (!(tab1 = fopen(CSVPATH_A, "r")) || !(tab2 = fopen(CSVPATH_B, "r")))
     {
-        perror("ERRO AO ABRIR O ARQUIVO");
+        perror("ERROR AO ABRIR O ARQUIVO");
         return EXIT_FAILURE;
     }
 
-    char line[MAX_LINE_LENGTH];
-
-    char title[50];
-    char developer[50];
-    char publisher[50];
+    char c;
+    char title[100];
+    char developer[30];
+    char publisher[35];
     char released[25];
-    char JP[5];
-    char EU[5];
-    char NA[5];
 
-    // fscanf(tab1, "%[^,]", title);
-    // printf("%s\n", title);
+    bool var = true;
+    int it;
+    int i = 0;
 
-    while (fscanf(tab1, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", title, developer,
-                  publisher, released, JP, EU, NA))
+    while (var)
     {
-        printf("%s, %s, %s, %s, %s, %s, %s\n", title, developer, publisher,
-               released, JP, EU, NA);
 
-        memset(title, 0, sizeof(title));
-        memset(developer, 0, sizeof(developer));
-        memset(publisher, 0, sizeof(publisher));
-        memset(released, 0, sizeof(released));
-        memset(JP, 0, sizeof(JP));
-        memset(EU, 0, sizeof(EU));
-        memset(NA, 0, sizeof(NA));
-    }
-
-    /*
-    while (fgets(line, sizeof(line), tab1))
-    {
-        printf("%s\n", line);
-
-        if (sscanf(line, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", title, developer,
-                   publisher, released, JP, EU, NA))
-
-            printf("data: %s, %s, %s, %s, %s, %s, %s\n", title, developer, publisher,
-                   released, JP, EU, NA);
-        else
+        i = 0;
+        while ((c = fgetc(tab1)) != ',')
         {
-            perror("ERRO AO LER OS DADOS");
-            return EXIT_FAILURE;
+            title[i] = c;
+            i++;
         }
+        title[i] = '\0';
+        printf("%s, ", title);
 
+        i = 0;
+        while ((c = fgetc(tab1)) != ',')
+        {
+            developer[i] = c;
+            i++;
+        }
+        developer[i] = '\0';
+        printf("%s, ", developer);
+
+        i = 0;
+        while ((c = fgetc(tab1)) != ',')
+        {
+            publisher[i] = c;
+            i++;
+        }
+        publisher[i] = '\0';
+        printf("%s, ", publisher);
+
+        i = 0;
+        while ((c = fgetc(tab1)) != ',')
+        {
+            released[i] = c;
+            i++;
+        }
+        released[i] = '\0';
+        printf("%s", released);
+
+        while (c = fgetc(tab1) != '\n')
+        {
+            if (c==EOF)
+                break;
+        }
+        printf("\n");
+ 
+        if (c == EOF)
+            var = false;
     }
-
-    char *name0 = (char *)malloc(10);
-    char *name1 = (char *)malloc(10);
-    char *name2 = (char *)malloc(10);
-    char *name3 = (char *)malloc(10);
-    char *name4 = (char *)malloc(10);
-    char *name5 = (char *)malloc(10);
-
-    strcpy(name0, "GTA3");
-    strcpy(name1, "GTASA");
-    strcpy(name2, "A.C.E");
-    strcpy(name3, "G.C.E");
-    strcpy(name4, "J.C.E");
-    strcpy(name5, "Z.C.E");
-
-    struct node *root = createNode(name0, 10);
-    struct node *NODE0 = createNode(name1, 10);
-    struct node *NODE1 = createNode(name2, 10);
-    struct node *NODE2 = createNode(name3, 10);
-    struct node *NODE3 = createNode(name4, 10);
-    struct node *NODE4 = createNode(name5, 10);
-
-    root = includeNode(root, NODE0);
-    root = includeNode(root, NODE1);
-    root = includeNode(root, NODE2);
-    root = includeNode(root, NODE3);
-    root = includeNode(root, NODE4);
-
-    // showElements(root);
-
-    showTree(root, 0);
-
-    root = rollLeft(root);
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    showTree(root, 0);
-
-    root = rollRight(root);
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    showTree(root, 0);
-
-    root = rollRight(root);
-
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    showTree(root, 0);
-
-    // showElements(root);
-    */
-
+    fclose(tab1);
+    fclose(tab2);
     return EXIT_SUCCESS;
 }
