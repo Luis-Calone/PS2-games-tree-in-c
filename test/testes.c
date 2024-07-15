@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef _WIN32
 #include "..\inc\Node.h"
@@ -7,9 +8,11 @@
 #define CSVPATH_B "..\\csv\\List_of_PlayStation(L-Z).csv"
 #else
 #include "../inc/Node.h"
-#define CSVPATH_A "../csv/List_of_PlayStation(A-K).csv"
-#define CSVPATH_B "../csv/List_of_PlayStation(L-Z).csv"
+#define CSVPATH_A "../csv/List_of_PlayStation_2_games(A-K).csv"
+#define CSVPATH_B "../csv/List_of_PlayStation_2_games(L-Z).csv"
 #endif
+
+#define MAX_LINE_LENGTH 255
 
 int main(int argc, char **argv)
 {
@@ -20,6 +23,32 @@ int main(int argc, char **argv)
     {
         perror("ERRO AO ABRIR O ARQUIVO");
         return EXIT_FAILURE;
+    }
+
+    char line[MAX_LINE_LENGTH];
+
+    char title[50];
+    char developer[60];
+    char publisher[50];
+    char released[25];
+
+    while (fgets(line, sizeof(line), tab1))
+    {
+        if (sscanf(line, "%[^,],%[^,],%[^,],%[^,]", title, developer,
+                   publisher, released))
+
+            printf("data: %s, %s, %s, %s\n", title, developer, publisher,
+                   released);
+        else
+        {
+            perror("ERRO AO LER OS DADOS");
+            return EXIT_FAILURE;
+        }
+
+        memset(title, 0, sizeof(title));
+        memset(developer, 0, sizeof(developer));
+        memset(publisher, 0, sizeof(publisher));
+        memset(released, 0, sizeof(released));
     }
 
     /*
