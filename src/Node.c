@@ -7,7 +7,7 @@
 #include "../inc/Node.h"
 #endif
 
-struct node *createNode(char *title, size_t sizeChar)
+struct node *createNode(char *title, int sizeChar)
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node));
     temp->title = (char *)malloc(sizeof(char) * sizeChar);
@@ -75,23 +75,23 @@ void showTree(struct node *a, int b)
 {
     if (a == NULL)
     {
-        printNum('*', b);
+        printNum("*", b);
         return;
     }
     showTree(a->right, b + 1);
-    printNum(a->title[0], b);
+    printNum(a->title, b);
     showTree(a->left, b + 1);
 }
 
 // A função auxiliar printNum imprime o caracter
 // c precedido de 3b espaços e seguido de uma mudança
 // de linha.
-void printNum(char c, int b)
+void printNum(char *c, int b)
 {
     int i;
     for (i = 0; i < b; i++)
-        printf("  ");
-    printf("%c\n", c);
+        printf("    ");
+    printf("%s\n", c);
 }
 
 struct node *rollRight(struct node *root)
@@ -120,6 +120,25 @@ struct node *rollLeft(struct node *root)
     root->left = temp->right;
     temp->right = root;
     return temp;
+}
+
+int heightTree(struct node *root)
+{
+    if (root == NULL)
+        return -1;
+
+    int left = heightTree(root->left);
+    int right = heightTree(root->right);
+
+    if (left > right)
+        return left + 1;
+
+    return right + 1;
+}
+
+int fbCalc(struct node *root)
+{
+    struct node *aux = root;
 }
 
 #endif

@@ -20,119 +20,110 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "");
 
-    FILE *tab1 = fopen(CSVPATH_A, "r");
-    FILE *tab2 = fopen(CSVPATH_B, "r");
+    struct node *teste = createNode("jteste", 7);
+    struct node *teste1 = createNode("dteste", 7);
+    struct node *teste2 = createNode("xteste", 7);
+    struct node *teste3 = createNode("ateste", 7);
+    struct node *teste4 = createNode("cteste", 7);
 
-    if (!(tab1 = fopen(CSVPATH_A, "r")) || !(tab2 = fopen(CSVPATH_B, "r")))
-    {
-        perror("ERROR AO ABRIR O ARQUIVO");
-        return EXIT_FAILURE;
-    }
+    teste = includeNode(teste, teste1);
+    teste = includeNode(teste, teste2);
+    teste = includeNode(teste, teste3);
+    teste = includeNode(teste, teste4);
 
-    char c = '\0';
-    char title[100];
-    char developer[30];
-    char publisher[35];
-    char released[25];
+    showTree(teste, 0);
 
-    bool var = true;
-    int it;
-    int i = 0;
+    printf("\n\n%d\n", heightTree(teste));
+    // FILE *tab1 = fopen(CSVPATH_A, "r");
+    // FILE *tab2 = fopen(CSVPATH_B, "r");
 
-    while (var)
-    {
-        i = 0;
-        if (c == '\"')
-        {
-            while ((c = fgetc(tab1)) != '\"')
-            {
-                title[i] = c;
-                i++;
-            }
-        }
-        else
-        {
+    // if (!(tab1 = fopen(CSVPATH_A, "r")) || !(tab2 = fopen(CSVPATH_B, "r")))
+    // {
+    //     perror("ERROR AO ABRIR O ARQUIVO");
+    //     return EXIT_FAILURE;
+    // }
 
-            while ((c = fgetc(tab1)) != ',')
-            {
-                title[i] = c;
-                i++;
-            }
-        }
-        title[i] = '\0';
-        printf("%s, ", title);
+    // char line[MAX_LINE_LENGTH];
+    // char c = '\0';
+    // char title[125];
+    // char developer[30];
+    // char publisher[35];
+    // char released[25];
 
-        i = 0;
-        if (c == '\"')
-        {
-            while ((c = fgetc(tab1)) != '\"')
-            {
-                developer[i] = c;
-                i++;
-            }
-        }
-        else
-        {
-            while ((c = fgetc(tab1)) != ',')
-            {
-                developer[i] = c;
-                i++;
-            }
-        }
-        developer[i] = '\0';
-        printf("%s, ", developer);
+    // bool quota = false;
+    // int it;
+    // int i, j;
 
-        i = 0;
-        if (c == '\"')
-        {
-            while ((c = fgetc(tab1)) != '\"')
-            {
-                publisher[i] = c;
-                i++;
-            }
-        }
-        else
-        {
-            while ((c = fgetc(tab1)) != ',')
-            {
-                publisher[i] = c;
-                i++;
-            }
-        }
-        publisher[i] = '\0';
-        printf("%s, ", publisher);
+    // while (fgets(line, sizeof(line), tab1))
+    // {
+    //     // printf("%s\n", line);
 
-        i = 0;
-        if (c == '\"')
-        {
-            while ((c = fgetc(tab1)) != '\"')
-            {
-                released[i] = c;
-                i++;
-            }
-        }
-        else
-        {
-            while ((c = fgetc(tab1)) != ',')
-            {
-                released[i] = c;
-                i++;
-            }
-            released[i] = '\0';
-            printf("%s", released);
-        }
+    //     i = 0;
+    //     j = 0;
+    //     if (line[0] == '\"')
+    //     {
+    //         while (line[i] != '\n')
+    //         {
+    //             title[i] = line[i];
+    //             i++;
+    //         }
+    //         quota = true;
+    //         title[i] = ' ';
+    //         continue;
+    //     }
 
-        while (c = fgetc(tab1) != '\n')
-        {
-            if (c == EOF)
-                break;
-        }
-        printf("\n");
+    //     if (quota)
+    //     {
+    //         i = strlen(title);
+    //         quota = false;
+    //     }
 
-        if (c == EOF)
-            var = false;
-    }
-    fclose(tab1);
-    fclose(tab2);
+    //     while (line[j] != ',')
+    //     {
+    //         title[i] = line[j];
+    //         i++;
+    //         j++;
+    //     }
+    //     title[i] = '\0';
+    //     printf("%s, ", title);
+
+    //     j += 1;
+    //     i = 0;
+    //     while (line[j] != ',')
+    //     {
+    //         developer[i] = line[j];
+    //         i++;
+    //         j++;
+    //     }
+    //     developer[i] = '\0';
+    //     printf("%s, ", developer);
+
+    //     j += 1;
+    //     i = 0;
+    //     while (line[j] != ',')
+    //     {
+    //         publisher[i] = line[j];
+    //         i++;
+    //         j++;
+    //     }
+    //     publisher[i] = '\0';
+    //     printf("%s, ", publisher);
+
+    //     j += 1;
+    //     i = 0;
+    //     while (line[j] != ',')
+    //     {
+    //         released[i] = line[j];
+    //         i++;
+    //         j++;
+    //     }
+    //     released[i] = '\0';
+    //     printf("%s\n", released);
+
+    //     memset(title,0,sizeof(title));
+    //     memset(publisher,0,sizeof(publisher));
+    //     memset(developer,0,sizeof(developer));
+    //     memset(released,0,sizeof(released));
+    // }
     return EXIT_SUCCESS;
 }

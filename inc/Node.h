@@ -11,19 +11,16 @@ struct node
 {
     struct node *left;
     struct node *right;
+    int fb;
     char *title;
+    char *developer;
+    char *publisher;
+    char *released;
     char *imgPath;
 };
 
-typedef struct tree
-{
-    struct node *root;
-    size_t hight;
-    int FB;
-} Tree;
-
 /* createNode() is the method that create each node */
-struct node *createNode(char *title, size_t sizeChar);
+struct node *createNode(char *title, int sizeChar);
 
 /* setImgPath() gets the created node and set the image path in the
 project files */
@@ -45,10 +42,14 @@ in the terminal */
 void showTree(struct node *a, int b);
 
 /* printNum() is an auxiliar method*/
-void printNum(char c, int b);
+void printNum(char *c, int b);
 
 /* rollRight() rolls the tree to the right side for balancing */
 struct node *rollRight(struct node *root);
 
 /* rollLeft() rolls the tree to the left side for balancing */
 struct node *rollLeft(struct node *root);
+
+int heightTree(struct node *root);
+
+int fbCalc(struct node *root);
