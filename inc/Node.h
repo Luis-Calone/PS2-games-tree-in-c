@@ -13,14 +13,20 @@ struct node
     struct node *right;
     int fb;
     char *title;
-    char *developer;
-    char *publisher;
-    char *released;
+    // char *developer;
+    // char *publisher;
+    // char *released;
     char *imgPath;
 };
 
 /* createNode() is the method that create each node */
-struct node *createNode(char *title, int sizeChar);
+struct node *createNode();
+
+struct node *setData(struct node *root,
+                     char *title);
+                    //  char *developer,
+                    //  char *publisher,
+                    //  char *released);
 
 /* setImgPath() gets the created node and set the image path in the
 project files */
@@ -37,7 +43,7 @@ struct node *includeNode(struct node *root, struct node *node_include);
 print itself in order */
 void showElements(struct node *root);
 
-/* showTree() its a method tha shows the tree horizontally 
+/* showTree() its a method tha shows the tree horizontally
 in the terminal */
 void showTree(struct node *a, int b);
 

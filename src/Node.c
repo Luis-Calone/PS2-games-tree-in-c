@@ -7,16 +7,39 @@
 #include "../inc/Node.h"
 #endif
 
-struct node *createNode(char *title, int sizeChar)
+struct node *createNode()
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node));
-    temp->title = (char *)malloc(sizeof(char) * sizeChar);
-    strcpy(temp->title, title);
+    temp->fb = 0;
+    temp->title = NULL;
+    // temp->developer = NULL;
+    // temp->publisher = NULL;
+    // temp->released = NULL;
     temp->left = NULL;
     temp->right = NULL;
     temp->imgPath = NULL;
 
     return temp;
+}
+
+struct node *setData(struct node *root,
+                     char *title)
+// char *developer,
+// char *publisher,
+// char *released)
+{
+    if (title == NULL)
+        // developer == NULL ||
+        // publisher == NULL ||
+        //  released == NULL)
+        return root;
+
+    strcpy(root->title, title);
+    // strcpy(root->developer, developer);
+    // strcpy(root->publisher, publisher);
+    // strcpy(root->released, released);
+
+    return root;
 }
 
 int setImgPath(struct node *node, char *imgPath)
