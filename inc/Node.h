@@ -50,8 +50,11 @@ struct node *rollRight(struct node *root);
 /* rollLeft() rolls the tree to the left side for balancing */
 struct node *rollLeft(struct node *root);
 
+/* calculate the height of the tree */
 int heightTree(struct node *root);
 
+/* calculate the fb */
 int fbCalc(struct node *root); 
 
+/* rotation if necessary */
 struct node *rotation(struct node *root);
