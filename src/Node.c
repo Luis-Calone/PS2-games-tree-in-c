@@ -11,10 +11,7 @@ struct node *createNode()
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node));
     temp->fb = 0;
-    temp->title = NULL;
-    // temp->developer = NULL;
-    // temp->publisher = NULL;
-    // temp->released = NULL;
+    temp->title = (char *)malloc(sizeof(char) * 100);
     temp->left = NULL;
     temp->right = NULL;
     temp->imgPath = NULL;
@@ -23,21 +20,12 @@ struct node *createNode()
 }
 
 struct node *setData(struct node *root,
-                     char *title)
-// char *developer,
-// char *publisher,
-// char *released)
+                     const char *title)
 {
     if (title == NULL)
-        // developer == NULL ||
-        // publisher == NULL ||
-        //  released == NULL)
         return root;
 
     strcpy(root->title, title);
-    // strcpy(root->developer, developer);
-    // strcpy(root->publisher, publisher);
-    // strcpy(root->released, released);
 
     return root;
 }
@@ -161,7 +149,40 @@ int heightTree(struct node *root)
 
 int fbCalc(struct node *root)
 {
-    struct node *aux = root;
+    if (root == NULL)
+        return 0;
+
+    int right, left;
+
+    right = heightTree(root->right);
+    left = heightTree(root->left);
+    root->fb = right - left;
+
+    return 1;
+}
+
+struct node *rotation(struct node *root)
+{
+    if (root->fb == 2 && root->right->fb == 1)
+    {
+        return rollLeft(root);
+    }
+    else if (root->fb == -2 && root->left->fb == -1)
+    {
+        return rollRight(root);
+    }
+    else if (root->fb == 2 && root->right->fb == -1)
+    {
+        root->right = rollLeft(root->right);
+        return rollRight(root);
+    }
+    else if (root->fb == -2 && root->left->fb == 1)
+    {
+        root->left = rollRight(root->left);
+        return rollLeft(root);
+    }
+
+    return root;
 }
 
 #endif

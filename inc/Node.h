@@ -13,9 +13,6 @@ struct node
     struct node *right;
     int fb;
     char *title;
-    // char *developer;
-    // char *publisher;
-    // char *released;
     char *imgPath;
 };
 
@@ -23,10 +20,7 @@ struct node
 struct node *createNode();
 
 struct node *setData(struct node *root,
-                     char *title);
-                    //  char *developer,
-                    //  char *publisher,
-                    //  char *released);
+                     const char *title);
 
 /* setImgPath() gets the created node and set the image path in the
 project files */
@@ -58,4 +52,6 @@ struct node *rollLeft(struct node *root);
 
 int heightTree(struct node *root);
 
-int fbCalc(struct node *root);
+int fbCalc(struct node *root); 
+
+struct node *rotation(struct node *root);

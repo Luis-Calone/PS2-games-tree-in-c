@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 
     struct node *root = createNode();
     root = setData(root, "Title");
-        printf("tA\n");
+    printf("tA\n");
 
     if (!(tab1 = fopen(argv[1], "r")))
     {
@@ -109,26 +109,33 @@ int main(int argc, char **argv)
     int i;
     while (fgets(line, sizeof(line), tab1))
     {
+        printf("%s\n", line);
         i = 0;
-        while (line[i] != ',' || line[i] != '\n')
+        while (line[i] != ',' && line[i] != '\n')
         {
             title[i] = line[i];
             i++;
         }
         title[i] = '\0';
 
-        printf("tA\n");
+        // printf("tA\n");
 
         struct node *nd = createNode();
         nd = setData(nd, title);
-        
-        printf("tA\n");
+
+        // printf("tA\n");
 
         root = includeNode(root, nd);
-        printf("tA\n");
+        // printf("tA\n");
+
+        fbCalc(root);
+
+        root = rotation(root);
 
         memset(title, 0, sizeof(title));
     }
+
+    showTree(root, 0);
 
     // fgets(line, sizeof(line), tab1);
 
