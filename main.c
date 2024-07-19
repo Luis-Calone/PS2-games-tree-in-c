@@ -14,12 +14,18 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "");
 
-    FILE *tab1;
+    FILE *tab1, *gphviz;
     char line[MAX_LINE_LENGTH];
     char title[255];
 
     struct node *root = createNode();
     root = setData(root, "Title");
+
+    if (!(gphviz = fopen("grphviz.txt", "w+")))
+    {
+        perror("ERRO AO CRIAR ARQUIVO");
+        return EXIT_FAILURE;
+    }
 
     if (!(tab1 = fopen(argv[1], "r")))
     {
@@ -50,9 +56,12 @@ int main(int argc, char **argv)
         memset(title, 0, sizeof(title));
     }
 
-    showTree(root, 0); // funcao para mostrar a arvore no terminal
+    fgraphviz(root, gphviz);
+    graphviz(root);
+    // showTree(root, 0); // funcao para mostrar a arvore no terminal
     // nao recomendada para vizualizacao de uma arvore grande, somente pra teste
 
     fclose(tab1);
+    fclose(gphviz);
     return EXIT_SUCCESS;
 }

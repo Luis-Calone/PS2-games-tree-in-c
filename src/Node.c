@@ -185,4 +185,32 @@ struct node *rotation(struct node *root)
     return root;
 }
 
+void fgraphviz(struct node *root, FILE *txt) // Faz a recursao nos nodes imprimindo o conteudo dele e do filho, caso houver.
+{
+    if (root != NULL && txt != NULL)
+    {
+        if (root->left != NULL)
+            fprintf(txt, "\"%s\" -- \"%s\"\n", root->title, root->left->title);
+        if (root->right != NULL)
+            fprintf(txt, "\"%s\" -- \"%s\"\n", root->title, root->right->title);
+
+        fgraphviz(root->left, txt);
+        fgraphviz(root->right, txt);
+    }
+}
+
+void graphviz(struct node *root) // Faz a recursao nos nodes imprimindo o conteudo dele e do filho, caso houver.
+{
+    if (root != NULL)
+    {
+        if (root->left != NULL)
+            printf("\"%s\" -- \"%s\"\n", root->title, root->left->title);
+        if (root->right != NULL)
+            printf("\"%s\" -- \"%s\"\n", root->title, root->right->title);
+
+        graphviz(root->left);
+        graphviz(root->right);
+    }
+}
+
 #endif

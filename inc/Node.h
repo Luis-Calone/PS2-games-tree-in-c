@@ -54,7 +54,11 @@ struct node *rollLeft(struct node *root);
 int heightTree(struct node *root);
 
 /* calculate the fb */
-int fbCalc(struct node *root); 
+int fbCalc(struct node *root);
 
 /* rotation if necessary */
 struct node *rotation(struct node *root);
+
+void fgraphviz(struct node *root, FILE *txt);
+
+void graphviz(struct node *root);
