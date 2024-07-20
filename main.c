@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     char title[255];
 
     struct node *root = createNode();
-    root = setData(root, "Title");
+    root = setData(root, "ROOT");
 
     if (!(gphviz = fopen("grphviz.txt", "w+")))
     {
@@ -39,7 +39,10 @@ int main(int argc, char **argv)
         i = 0; // verificando caso ',' ou '\n'
         while (line[i] != ',' && line[i] != '\n')
         {
-            title[i] = line[i];
+            if (line[i] == '\"')
+                title[i] = ' ';
+            else
+                title[i] = line[i];
             i++;
         }
         title[i] = '\0';
